@@ -9,7 +9,7 @@ ultima <- tibble()
 nombres <- c( "19", "18", "17")
 pb = txtProgressBar(min=1, max=length(nombres), style=3)
 for(i in 1:length(nombres)) {
-inp <- "~/Documents/otros/inp"
+inp <- "~/Git/envipe_autoridad/inp"
 df <- foreign::read.dbf(paste(inp, paste0("TPer_Vic1_", nombres[i], ".dbf"), sep="/"), as.is = T) %>%
      clean_names() %>%
      select(upm:aream, est_dis, upm_dis, ap4_1:fac_ele_am) %>%

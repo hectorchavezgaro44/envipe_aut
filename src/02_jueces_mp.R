@@ -9,6 +9,7 @@ p_load(sf, tidyverse, foreign, survey,  readxl, here, janitor)
 options(survey.lonely.psu="adjust")
 
 inp <- "~/Documents/otros/inp"
+
 df <- foreign::read.dbf(paste(inp, "TPer_Vic1.dbf", sep="/"), as.is = T) %>%
   clean_names() %>%
   select(upm:aream, est_dis, upm_dis, ap4_1:fac_ele_am) %>%
