@@ -1,6 +1,6 @@
 rm(list=ls())
 require(pacman)
-p_load(sf, tidyverse, foreign, survey,  readxl, here, janitor)
+p_load(sf, tidyverse, foreign, survey,  readxl, here, janitor, ggmosaic)
 
 
 
@@ -65,25 +65,3 @@ ggplot(data = tempo) +
   theme(legend.position = "none")
 
 
-tempo <- mean_edo_corrupto %>%
-  as.tibble() %>%
-  select( 1:4) %>%
-  gather(variable, total, 3:4) %>%
-  mutate(variable=gsub("ap5_5_07", "", variable)) %>%
-  rename("ent"="pe$ent", "sexo"="pe$sexo") %>%
-  filter(ent=="05") %>%
-  mutate(var=case_when(variable=="Corrupto"~ 1,
-                       variable=="No corrupto" ~2)) %>%
-  arrange(desc(var)) %>%
-  mutate(var=factor(var, label=c("Corrupto", "No corrupto")))
-
-tempo$sexo <- as.character(tempo$sexo)
-tempo$var <- as.character(tempo$var)
-
-
-ggplot(data = tempo) +
-  geom_mosaic(aes(x = product(sexo), weight=total,fill = var)) +
-  scale_fill_manual(values = c("#377eb8", "#4daf4a")) +
-  labs(x="", y="") +
-  theme_bw()+
-  theme(legend.position = "none")
